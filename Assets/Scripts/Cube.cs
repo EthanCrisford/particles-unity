@@ -1,16 +1,19 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Cube : MonoBehaviour
 {
     Rigidbody rb;
-    float movementSpeed = 1f;
+    float movementSpeed = 5f;
+    public ParticleSystem ParticleSystem;
 
     // Start is called before the first frame update
     void Start()
     {
         rb = GetComponent<Rigidbody>();
+
     }
 
     // Update is called once per frame
@@ -25,6 +28,22 @@ public class Cube : MonoBehaviour
         if (cubeTrigger.gameObject.tag == "TriggerCube")
         {
             print("collided");
+
         }
     }
+
+    public void OnTriggerEnter(Collider cubeTrigger)
+    {
+        if (cubeTrigger.gameObject.tag == "TriggerCube")
+        {
+            Instantiate(ParticleSystem, cubeTrigger.transform.position,Quaternion.identity);
+
+        }
+    }
+
+
+
 }
+
+
+
